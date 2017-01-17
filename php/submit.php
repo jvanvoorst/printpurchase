@@ -2,6 +2,7 @@
 
 include('./../resources/lib/httpful/httpful.phar');
 include('./../resources/config.php');
+include('./../resources/db.php');
 include('email.php');
 
 // get data from POST

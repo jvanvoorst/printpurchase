@@ -1,6 +1,7 @@
 <?php
 
 include('./../resources/config.php');
+include('./../resources/config.php');
 require_once 'Mail.php';
 
 function sendMail($header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {

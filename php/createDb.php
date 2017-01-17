@@ -1,6 +1,7 @@
 <?php
 
 include('./../resources/config.php');
+include('./../resources/db.php');
 
 try {
     // set the PDO error mode to exception
