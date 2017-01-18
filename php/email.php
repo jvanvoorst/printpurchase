@@ -13,13 +13,13 @@ function sendMail($recipients, $header, $body) {
     if (PEAR::isError($mail)) {
       echo("<p>" . $mail->getMessage() . "</p>");
     } else {
-      echo("<p>Message successfully sent!</p>");
+      echo "\nMessage sent to " . $recipients;
     }
 }
 
-function createBody ($body, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {
+function createBody ($body, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime) {
     $ref = "Order ref# " . $id . "\n\n";
-    $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\nDelivery Time: " . $deliveryTime . " days (from Coutts)" . "\n\n";
+    $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\nDelivery Time: " . $deliveryTime . "\n\n";
     $patron = "Patron\nName: " . $firstName . " " . $lastName . "\nAffiliation: " . $affiliation . "\nDepartment: " . $department . "\nEmail: " . $email;
 
     return $body . $ref . $book . $patron;

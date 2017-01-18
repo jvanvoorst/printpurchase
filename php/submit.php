@@ -37,7 +37,7 @@ catch(PDOException $e) {
 // if delivery speed is regular order book and send email to staff
 if ($delivery == "regular") {
     // email for staff
-    $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+    $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
     sendMail($smtp["recipients"], $smtp["headerRegular"], $body);
 
     // order with ProQuest API
@@ -47,11 +47,11 @@ if ($delivery == "regular") {
 // else delivery speed is expedite just send email to staff
 } else { 
     // email for staff
-    $body = createBody($smtp["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+    $body = createBody($smtp["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
     sendMail($smtp["recipients"], $smtp["headerRush"], $body);
 }
 // email for patron
-$bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+$bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
 sendMail($email, $smtp["headerPatron"], $bodyPatron);
 
 $db = null;
