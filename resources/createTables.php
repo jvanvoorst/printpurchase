@@ -9,7 +9,7 @@ try {
 
     // sql to create table
     $sql = "CREATE TABLE orders (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(6) UNSIGNED AUTO_INCREMENT = 1000 PRIMARY KEY,
     isbn VARCHAR(20) NULL,
     title VARCHAR(100) NULL,
     author VARCHAR(50) NULL, 

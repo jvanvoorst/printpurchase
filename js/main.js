@@ -40,8 +40,7 @@ $(function() {
             data: $('form').serialize(),
             success: function(res, status) {
                 console.log(res);
-                // window.location.replace("http://culibraries.colorado.edu/printpurchase/success.html");
-                window.location.replace("success.html");
+                // window.location.replace("success.html");
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
