@@ -33,23 +33,28 @@ try {
 catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-$db = null;
 
-// if delivery speed is regular order book and send email
+// if delivery speed is regular order book and send email to staff
 if ($delivery == "regular") {
-	// set appropriate header and call email function
-	$header = $smtp["headerRegular"];
-	sendMail($id, $header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+    // email for staff
+    $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+    sendMail($smtp["recipients"], $smtp["headerRegular"], $body);
 
- 	// order with ProQuest API
+    // order with ProQuest API
     $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
     // $response = \Httpful\Request::get($url)->send();
 
-// else delivery speed is expedite, set header and call email function
+// else delivery speed is expedite just send email to staff
 } else { 
-	$header = $smtp["headerRush"];
-	sendMail($id, $header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+    // email for staff
+    $body = createBody($smtp["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+    sendMail($smtp["recipients"], $smtp["headerRush"], $body);
 }
+// email for patron
+$bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
+sendMail($email, $smtp["headerPatron"], $bodyPatron);
 
+$db = null;
 exit();
+
 ?>

@@ -3,14 +3,12 @@
 include('./../resources/config.php');
 require_once 'Mail.php';
 
-function sendMail($id, $header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {
+function sendMail($recipients, $header, $body) {
     global $smtp;
-    // create message body
-    $body = createBody($id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
     // create mail object
     $mail_object =& Mail::factory("smtp", $smtp["smtp"]);
     // send email
-    $mail_object->send($smtp["recipients"], $header, $body);
+    $mail_object->send($recipients, $header, $body);
     // echo error or success message
     if (PEAR::isError($mail)) {
       echo("<p>" . $mail->getMessage() . "</p>");
@@ -19,17 +17,12 @@ function sendMail($id, $header, $isbn, $title, $author, $firstName, $lastName, $
     }
 }
 
-function createBody ($id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {
-    global $smtp;
-    $ref = "Order ref# " . $id . "\n";
+function createBody ($body, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {
+    $ref = "Order ref# " . $id . "\n\n";
     $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\nDelivery Time: " . $deliveryTime . " days (from Coutts)" . "\n\n";
     $patron = "Patron\nName: " . $firstName . " " . $lastName . "\nAffiliation: " . $affiliation . "\nDepartment: " . $department . "\nEmail: " . $email;
 
-    if ($delivery == "regular") {
-        return $smtp["bodyRegular"] . $ref . $book . $patron;
-    } else {
-        return $smtp["bodyRush"] . $ref . $book . $patron;
-    }
+    return $body . $ref . $book . $patron;
 }
 
 ?>
