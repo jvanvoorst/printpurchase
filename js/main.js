@@ -1,3 +1,65 @@
+// grab url parameters
+var urlParams = urlObject({'url':window.location.href});
+var isbn = urlParams.parameters.isbn;
+var title = unescape(urlParams.parameters.title);
+var author = unescape(urlParams.parameters.author);
+
+console.log('ISBN: ' + isbn);
+console.log('Title: ' + title);
+console.log('Author: ' + author);
+
+$(function() {
+    // retrieve book data from Coutts
+    $.ajax({
+        url: 'php/getbookinfo.php',
+        type: 'GET',
+        data: {'isbn' : urlParams.parameters.isbn},
+        success: function(res, status) {
+            var patronDate = adjustDate(Number(res));
+            $('#deliveryTimePatron').html("<input class=\"form-control\" type=\"text\" value=\"" + patronDate + "\" name=\"deliveryTimePatron\" readonly>");
+            $('#deliveryTime').val(Number(res));
+        },
+        error: function(xhr, desc, err) {
+            console.log(xhr);
+            console.log("Details: " + desc + "\nError: " + err);
+        }
+    });
+
+    // prefill book info
+    $('#title').val(title);
+    $('#author').val(author);
+    $('#isbn').val(isbn);
+    
+    // Submit action
+    $('form').submit( function(event) {        
+        event.preventDefault();
+        $(submitBtn).fadeOut(300);
+        $.ajax({
+            url: 'php/submit.php',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(res, status) {
+                console.log(res);
+                // window.location.replace("http://culibraries.colorado.edu/printpurchase/success.html");
+                window.location.replace("success.html");
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError: " + err);
+            }
+        });
+    });
+});
+
+// adjust date returned from Coutts to be at least 5 days and add four otherwise
+function adjustDate(date) {
+    if (date < 2) {
+        return 5;
+    } else {
+        return date + 4;
+    }
+}
+
  // function to create object from url and it's parameters
 function urlObject(options) {
     "use strict";
@@ -79,66 +141,6 @@ function urlObject(options) {
     };
 
     return urlObj;
-}
-
-// grab url parameters
-var urlParams = urlObject({'url':window.location.href});
-var isbn = urlParams.parameters.isbn;
-var title = unescape(urlParams.parameters.title);
-var author = unescape(urlParams.parameters.author);
-
-console.log('ISBN: ' + isbn);
-console.log('Title: ' + title);
-console.log('Author: ' + author);
-
-$(function() {
-    // retrieve book data from Coutts
-    $.ajax({
-        url: 'php/getbookinfo.php',
-        type: 'GET',
-        data: {'isbn' : urlParams.parameters.isbn},
-        success: function(res, status) {
-            var patronDate = adjustDate(Number(res));
-            $('#deliveryTimePatron').html("<input class=\"form-control\" type=\"text\" value=\"" + patronDate + "\" name=\"deliveryTimePatron\" readonly>");
-            $('#deliveryTime').val(Number(res));
-        },
-        error: function(xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError: " + err);
-        }
-    });
-
-    // prefill book info
-    $('#title').val(title);
-    $('#author').val(author);
-    $('#isbn').val(isbn);
-    
-    // Submit action
-    $('form').submit( function(event) {        
-        event.preventDefault();
-        $(submitBtn).fadeOut(300);
-
-        $.ajax({
-            url: 'php/submit.php',
-            type: 'POST',
-            data: $('form').serialize(),
-            success: function(res, status) {
-                console.log(res);
-            },
-            error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError: " + err);
-            }
-        });
-    });
-});
-
-function adjustDate(date) {
-    if (date < 2) {
-        return 5;
-    } else {
-        return date + 4;
-    }
 }
 
 
