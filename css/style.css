@@ -11,6 +11,9 @@ legend {
 .btn {
 	margin-top: 10px;
 }
+#submitBtn {
+	display: none;
+}
 
 /* header */
 header {

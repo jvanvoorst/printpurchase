@@ -110,24 +110,28 @@
             <input type="text" class="form-control" id="deliveryTime" name="deliveryTime" readonly>
         </fieldset>
 
-        <fieldset class="radio-group">
-            <!-- Delivery speed selection -->
-            <legend>Choose One:</legend>
-            <div class="radio">
-                <label for="regular">
-                    <input id="regular" type="radio" value="regular" name="delivery" required>
-                    The delivery time listed above is sufficient
-                </label>
+        <div class="row">
+            <fieldset class="radio-group col-md-6">
+                <!-- Delivery speed selection -->
+                <legend>Choose One:</legend>
+                <div class="radio">
+                    <label for="regular">
+                        <input id="regular" type="radio" value="regular" name="delivery" required>
+                        The delivery time listed above is sufficient
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="rush">
+                        <input id="rush" type="radio" value="rush" name="delivery" required>
+                        I need this book faster
+                    </label>
+                </div>
+            </fieldset>
+            <div class="col-md-6">
+                <button type="submit" value="submit" class="btn btn-warning btn-submit" id="submitBtn">Submit</button>
             </div>
-            <div class="radio">
-                <label for="rush">
-                    <input id="rush" type="radio" value="rush" name="delivery" required>
-                    I need this book faster
-                </label>
-            </div>
-        </fieldset>
+        </div>
 
-        <button type="submit" value="submit" class="btn btn-warning btn-submit" id="submitBtn">Submit</button>
 
     </form>
 

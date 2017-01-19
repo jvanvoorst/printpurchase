@@ -18,6 +18,7 @@ $(function() {
             var patronDate = adjustDate(Number(res));
             $('#deliveryTimePatron').html("<input class=\"form-control\" type=\"text\" value=\"" + patronDate + "\" name=\"deliveryTimePatron\" readonly>");
             $('#deliveryTime').val(Number(res));
+            $(submitBtn).show();
         },
         error: function(xhr, desc, err) {
             console.log(xhr);
