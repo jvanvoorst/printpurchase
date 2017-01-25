@@ -42,7 +42,7 @@ if ($delivery == "regular") {
 
     // order with ProQuest API
     $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
-    // $response = \Httpful\Request::get($url)->send();
+    $response = \Httpful\Request::get($url)->send();
 
 // else delivery speed is expedite just send email to staff
 } else { 
