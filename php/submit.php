@@ -3,7 +3,8 @@
 include('./../resources/lib/httpful/httpful.phar');
 include('./../resources/config.php');
 include('./../resources/db.php');
-include('email.php');
+require_once 'Mail.php';
+// include('email.php');
 
 // get data from POST
 $isbn = $_POST['isbn'];
@@ -18,7 +19,6 @@ $delivery = $_POST['delivery'];
 $deliveryTimePatron = $_POST['deliveryTimePatron'];
 $deliveryTime = $_POST['deliveryTime'];
 
-	
 // insert into db
 try {
     // set the PDO error mode to exception
@@ -34,6 +34,10 @@ catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
 
+// email for patron
+$bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
+sendMail($email, $smtp["headerPatron"], $bodyPatron);
+
 // if delivery speed is regular order book and send email to staff
 if ($delivery == "regular") {
     // email for staff
@@ -41,8 +45,8 @@ if ($delivery == "regular") {
     sendMail($smtp["recipients"], $smtp["headerRegular"], $body);
 
     // order with ProQuest API
-    $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
-    $response = \Httpful\Request::get($url)->send();
+    // $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
+    // $response = \Httpful\Request::get($url)->send();
 
 // else delivery speed is expedite just send email to staff
 } else { 
@@ -50,9 +54,28 @@ if ($delivery == "regular") {
     $body = createBody($smtp["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
     sendMail($smtp["recipients"], $smtp["headerRush"], $body);
 }
-// email for patron
-$bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
-sendMail($email, $smtp["headerPatron"], $bodyPatron);
+
+function sendMail($recipients, $header, $body) {
+    global $smtp;
+    // create mail object
+    $mail_object =& Mail::factory("smtp", $smtp["smtp"]);
+    // send email
+    $mail_object->send($recipients, $header, $body);
+    // echo error or success message
+    if (PEAR::isError($mail)) {
+      echo("<p>" . $mail->getMessage() . "</p>");
+    } else {
+      echo "\nMessage sent to " . $recipients;
+    }
+}
+
+function createBody($body, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $dt) {
+    $ref = "Order ref# " . $id . "\n\n";
+    $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\nDelivery Time: " . $dt . "\n\n";
+    $patron = "Patron\nName: " . $firstName . " " . $lastName . "\nAffiliation: " . $affiliation . "\nDepartment: " . $department . "\nEmail: " . $email;
+
+    return $body . $ref . $book . $patron;
+}
 
 $db = null;
 exit();

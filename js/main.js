@@ -4,10 +4,6 @@ var isbn = urlParams.parameters.isbn;
 var title = unescape(urlParams.parameters.title);
 var author = unescape(urlParams.parameters.author);
 
-console.log('ISBN: ' + isbn);
-console.log('Title: ' + title);
-console.log('Author: ' + author);
-
 $(function() {
     // retrieve book data from Coutts
     $.ajax({
@@ -41,7 +37,7 @@ $(function() {
             data: $('form').serialize(),
             success: function(res, status) {
                 console.log(res);
-                window.location.replace("success.html");
+                // window.location.replace("success.html");
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
@@ -53,10 +49,10 @@ $(function() {
 
 // adjust date returned from Coutts to be at least 5 days and add four otherwise
 function adjustDate(date) {
-    if (date < 2) {
-        return 5;
+    if (date < 4) {
+        return 12;
     } else {
-        return date + 4;
+        return date + 8;
     }
 }
 
