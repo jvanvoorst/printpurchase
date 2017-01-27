@@ -39,15 +39,20 @@ $bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firs
 sendMail($email, $smtp["headerPatron"], $bodyPatron);
 
 // if delivery speed is regular order book and send email to staff
-if ($delivery == "regular") {
-    // email for staff
-    $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
-    sendMail($smtp["recipients"], $smtp["headerRegular"], $body);
-
+if ($delivery === "regular") {
     // order with ProQuest API
-    // $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
-    // $response = \Httpful\Request::get($url)->send();
-
+    $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn . '&Quantity=1';
+    $response = \Httpful\Request::get($url)->send();
+    $res = json_decode($response);
+    // if order is successfull ie code = 100 send success message to staff
+    if ($res->Code === 100) {
+        $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
+        sendMail($smtp["recipients"], $smtp["headerRegular"], $body);
+    // else send error message to staff
+    } else {
+        $body = createBody($smtp["bodyError"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime) . "\n\n" . $res->Message;
+        sendMail($smtp["recipients"], $smtp["headerError"], $body);
+    }
 // else delivery speed is expedite just send email to staff
 } else { 
     // email for staff
