@@ -7,7 +7,6 @@ include('./../resources/lib/httpful/httpful.phar');
 include('./../resources/config.php');
 include('./../resources/db.php');
 require_once 'Mail.php';
-// include('email.php');
 
 // get data from POST
 $isbn = $_POST['isbn'];
@@ -50,25 +49,25 @@ if ($delivery === "regular") {
     // if order is successfull ie code = 100 send success message to staff
     if ($res->Code === 100) {
         $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
-        sendMail($smtp["recipients"], $smtp["headerRegular"], $body);
+        sendMail($addr["staff"], $smtp["headerRegular"], $body);
     // else send error message to staff
     } else {
         $body = createBody($smtp["bodyError"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime) . "\n\n" . $res->Message;
-        sendMail($smtp["recipients"], $smtp["headerError"], $body);
+        sendMail($addr["staff"], $smtp["headerError"], $body);
     }
 // else delivery speed is expedite just send email to staff
 } else { 
     // email for staff
     $body = createBody($smtp["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
-    sendMail($smtp["recipients"], $smtp["headerRush"], $body);
+    sendMail($addr["staff"], $smtp["headerRush"], $body);
 }
 
-function sendMail($recipients, $header, $body) {
+function sendMail($recipients, $header, $body) {    
     global $smtp;
     // create mail object
-    $mail_object =& Mail::factory("smtp", $smtp["smtp"]);
+    $smtpMail = Mail::factory("smtp", $smtp["smtp"]);
     // send email
-    $mail_object->send($recipients, $header, $body);
+    $mail = $smtpMail->send($recipients, $header, $body);
     // echo error or success message
     if (PEAR::isError($mail)) {
       echo("<p>" . $mail->getMessage() . "</p>");
