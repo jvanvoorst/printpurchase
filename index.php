@@ -23,7 +23,7 @@
         
         // trim after ':'
         function trimStr($sourceStr) {
-            if(($pos = strpos($sourceStr, ':')) !== FALSE) {
+            if(($pos = strpos($sourceStr, ';')) !== FALSE) {
                 return substr($sourceStr, 0, $pos);
             } else {
                 return $sourceStr;
