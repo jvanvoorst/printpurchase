@@ -14,6 +14,23 @@
 
     <body>
 
+    <?php
+        // grab shibboleth attributes
+        $givenName = trimStr($_SERVER['givenName']);
+        $sn = trimStr($_SERVER['sn']);
+        $mail = $_SERVER['mail'];
+        $homeDepartment = $_SERVER['cuEduPersonHomeDepartment'];
+        
+        // trim after ':'
+        function trimStr($sourceStr) {
+            if(($pos = strpos($sourceStr, ':')) !== FALSE) {
+                return substr($sourceStr, 0, $pos);
+            } else {
+                return $sourceStr;
+            }
+        }
+    ?>
+
     <header>
         <div class="container banner">
             <p class="banner-text">University Libraries</p>
@@ -30,11 +47,11 @@
         <div class="row">
             <fieldset class="form-group col-md-6">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $givenName; ?>" required>
             </fieldset>
             <fieldset class="form-group col-md-6">
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $sn; ?>" required>
             </fieldset>
         </div>
 
@@ -43,12 +60,12 @@
                 <!-- Department Major -->
                 <fieldset class="form-group">
                         <label for="department">Department/Major</label>
-                        <input type="text" class="form-control" name="department" id="department" required>
+                        <input type="text" class="form-control" name="department" id="department" value="<?php echo $homeDepartment; ?>" required>
                 </fieldset>
                 <!-- Email Address -->
                 <fieldset class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" class="form-control" name="email" id="email" required>
+                        <input type="email" class="form-control" name="email" id="email" value="<?php echo $mail; ?>"required>
                 </fieldset>
             </div>
             <!-- Affiliation -->
