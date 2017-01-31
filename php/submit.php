@@ -37,8 +37,9 @@ catch(PDOException $e) {
 }
 
 // email for patron
-$bodyPatron = createBody($smtp["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
-sendMail($email, $smtp["headerPatron"], $bodyPatron);
+$bodyPatron = createBody($config["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
+$config["headerPatron"]["To"] = $email;
+sendMail($email, $config["headerPatron"], $bodyPatron);
 
 // if delivery speed is regular order book and send email to staff
 if ($delivery === "regular") {
@@ -48,24 +49,24 @@ if ($delivery === "regular") {
     $res = json_decode($response);
     // if order is successfull ie code = 100 send success message to staff
     if ($res->Code === 100) {
-        $body = createBody($smtp["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
-        sendMail($addr["staff"], $smtp["headerRegular"], $body);
+        $body = createBody($config["bodyRegular"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
+        sendMail($addr["staff"], $config["headerRegular"], $body);
     // else send error message to staff
     } else {
-        $body = createBody($smtp["bodyError"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime) . "\n\n" . $res->Message;
-        sendMail($addr["staff"], $smtp["headerError"], $body);
+        $body = createBody($config["bodyError"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime) . "\n\n" . $res->Message;
+        sendMail($addr["staff"], $config["headerError"], $body);
     }
 // else delivery speed is expedite just send email to staff
 } else { 
     // email for staff
-    $body = createBody($smtp["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
-    sendMail($addr["staff"], $smtp["headerRush"], $body);
+    $body = createBody($config["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
+    sendMail($addr["staff"], $config["headerRush"], $body);
 }
 
 function sendMail($recipients, $header, $body) {    
-    global $smtp;
+    global $config;
     // create mail object
-    $smtpMail = Mail::factory("smtp", $smtp["smtp"]);
+    $smtpMail = Mail::factory("smtp", $config["smtp"]);
     // send email
     $mail = $smtpMail->send($recipients, $header, $body);
     // echo error or success message
