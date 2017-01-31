@@ -1,5 +1,4 @@
 <?php
-
 include('./../resources/config.php');
 
 $db = new PDO(
