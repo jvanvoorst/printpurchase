@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<p> <?php echo 'uid: ' . $_SERVER['uid']; </p>
+
 <p> <?php echo 'givenName: ' . $_SERVER['givenName']; </p>
 <p> <?php echo 'mail: ' . $_SERVER['mail']; </p>
 <p> <?php echo 'sn: ' . $_SERVER['sn']; </p>

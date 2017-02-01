@@ -1,8 +1,4 @@
-.title {
-	font-size: 28px;
-	/*font-weight: bold;	*/
-}
-legend {
+.radio-legend {
 	border-bottom: none;
 	font-size: 14px;
 	font-weight: 700;
@@ -11,11 +7,8 @@ legend {
 .btn {
 	margin-top: 10px;
 }
-#submitBtn {
-	display: none;
-}
 
-/* header */
+/* CU branding header */
 header {
     width: 100%;
     height: 120px;

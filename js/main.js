@@ -5,6 +5,8 @@ var title = unescape(urlParams.parameters.title);
 var author = unescape(urlParams.parameters.author);
 
 $(function() {
+    // initial hide submit button until delivery date is returned
+    $(submitBtn).hide();
     // retrieve book data from Coutts
     $.ajax({
         url: 'php/getbookinfo.php',

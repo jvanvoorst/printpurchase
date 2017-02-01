@@ -3,6 +3,7 @@
 
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Print Purchase on Demand</title>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -38,11 +39,13 @@
     </header>
 
     <div class="container">
-        <h1 class="title">Request this Book</h1>
-        <p>The University Libraries does not own this book. By completing this form you are requesting that the Libraries purchase this book for the collection. Regular orders may take up to 2 weeks to arrive. If you need this book immediately, please make that choice below.</p>
+        <p class="lead">The University Libraries does not own this book. By completing this form you are requesting that the Libraries purchase this book for the collection. Regular orders may take up to 2 weeks to arrive. If you need this book immediately, please make that choice below.</p>
     </div>
 
     <form class="container">
+
+        <!-- Patron ====================================================== -->
+        <h1 class="h2">Patron <small>Please verify your info</small></h1>
         <!-- First name Last name -->
         <div class="row">
             <fieldset class="form-group col-md-6">
@@ -69,30 +72,33 @@
                 </fieldset>
             </div>
             <!-- Affiliation -->
-            <fieldset class="radio-group col-md-6">
-                <legend>Affiliation</legend>
-                <div class="radio">
-                    <label for="grad">
-                        <input id="grad" type="radio" value="grad" name="affiliation" required>
-                        Graduate Student
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="faculty">
-                        <input id="faculty" type="radio" value="faculty" name="affiliation" required>
-                        Faculty
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="staff">
-                        <input id="staff" type="radio" value="staff" name="affiliation" required>
-                        Staff
-                    </label>
-                </div>
-            </fieldset>
+            <div class="col-md-6">
+                <fieldset class="radio-group">
+                    <legend class="radio-legend">Affiliation</legend>
+                    <div class="radio">
+                        <label for="grad">
+                            <input id="grad" type="radio" value="grad" name="affiliation" required>
+                            Graduate Student
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="faculty">
+                            <input id="faculty" type="radio" value="faculty" name="affiliation" required>
+                            Faculty
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="staff">
+                            <input id="staff" type="radio" value="staff" name="affiliation" required>
+                            Staff
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
         </div>
 
-        <h2 class="title">About the Book</h2>
+        <!-- Book ======================================================== -->
+        <h2 class="h2">Book</h2>
         <div class="row">
             <!-- Title -->
             <fieldset class="form-group col-md-6">
@@ -112,7 +118,12 @@
                 <label for="isbn">ISBN</label>
                 <input type="text" class="form-control" id="isbn" name="isbn" readonly>
             </fieldset>
-            <!-- Delivery Time (modified from what Coutts sends back) -->
+        </div>
+
+        <!-- Delivery ==================================================== -->
+        <h3 class="h2">Delivery</h3>
+        <!-- Delivery Time (modified from what Coutts sends back) -->
+        <div class="row">
             <fieldset class="form-group col-md-6">
                 <label for="deliveryTimePatron">Estimated Delivery Time (business days)</label>
                 <div id="deliveryTimePatron">
@@ -120,17 +131,16 @@
                 </div>
             </fieldset>
         </div>
-
         <!-- hidden input for the real delivery time returned from Coutts -->
         <fieldset class="form-group" hidden>
             <label for="deliveryTime">Delivery Time (real)</label>
             <input type="text" class="form-control" id="deliveryTime" name="deliveryTime" readonly>
         </fieldset>
-
+        <!-- Delivery selection -->
         <div class="row">
             <fieldset class="radio-group col-md-6">
                 <!-- Delivery speed selection -->
-                <legend>Choose One:</legend>
+                <legend class="radio-legend">Choose One:</legend>
                 <div class="radio">
                     <label for="regular">
                         <input id="regular" type="radio" value="regular" name="delivery" required>
@@ -144,11 +154,11 @@
                     </label>
                 </div>
             </fieldset>
-            <div class="col-md-6">
-                <button type="submit" value="submit" class="btn btn-lg btn-warning btn-submit" id="submitBtn">Submit</button>
-            </div>
         </div>
-
+        <!-- submit button -->
+        <div class="row text-center">
+            <button type="submit" value="submit" class="btn btn-lg btn-warning btn-submit" id="submitBtn">Submit</button>
+        </div>
 
     </form>
 
