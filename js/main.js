@@ -39,7 +39,11 @@ $(function() {
             data: $('form').serialize(),
             success: function(res, status) {
                 console.log(res);
-                window.location.replace("success.html");
+                if ($('#no-Order').is(':checked')) {
+                    window.location.replace("noorder.html");
+                } else {
+                    window.location.replace("success.html");
+                }
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
@@ -51,10 +55,10 @@ $(function() {
 
 // adjust date returned from Coutts to be at least 5 days and add four otherwise
 function adjustDate(date) {
-    if (date < 4) {
-        return 12;
+    if (date <= 4) {
+        return 18;
     } else {
-        return date + 8;
+        return date + 18;
     }
 }
 

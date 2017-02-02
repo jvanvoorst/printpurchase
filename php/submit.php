@@ -36,10 +36,12 @@ catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
 
-// email for patron
-$bodyPatron = createBody($config["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
-$config["headerPatron"]["To"] = $email;
-sendMail($email, $config["headerPatron"], $bodyPatron);
+// email for patron unless delivery = no-Order
+if ($delivery !== "no-Order") {
+    $bodyPatron = createBody($config["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
+    $config["headerPatron"]["To"] = $email;
+    sendMail($email, $config["headerPatron"], $bodyPatron);
+}
 
 // if delivery speed is regular order book and send email to staff
 if ($delivery === "regular") {
@@ -57,7 +59,7 @@ if ($delivery === "regular") {
         sendMail($addr["staff"], $config["headerError"], $body);
     }
 // else delivery speed is expedite just send email to staff
-} else { 
+} else if ($delivery === "rush") { 
     // email for staff
     $body = createBody($config["bodyRush"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime);
     sendMail($addr["staff"], $config["headerRush"], $body);

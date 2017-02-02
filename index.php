@@ -39,7 +39,7 @@
     </header>
 
     <div class="container">
-        <p class="lead">The University Libraries does not own this book. By completing this form you are requesting that the Libraries purchase this book for the collection. Regular orders may take up to 2 weeks to arrive. If you need this book immediately, please make that choice below.</p>
+        <p class="lead">The University Libraries does not own this book. By completing this form you are requesting that the Libraries purchase this book for the collection. There is no charge for this service.</p>
     </div>
 
     <form class="container">
@@ -121,11 +121,11 @@
         </div>
 
         <!-- Delivery ==================================================== -->
-        <h3 class="h2">Delivery</h3>
+        <h3 class="h2">Estimated Delivery Time</h3>
         <!-- Delivery Time (modified from what Coutts sends back) -->
         <div class="row">
             <fieldset class="form-group col-md-6">
-                <label for="deliveryTimePatron">Estimated Delivery Time (business days)</label>
+                <label for="deliveryTimePatron">(business days)</label>
                 <div id="deliveryTimePatron">
                     <img alt="loading" src="img/spin.svg">
                 </div>
@@ -151,6 +151,12 @@
                     <label for="rush">
                         <input id="rush" type="radio" value="rush" name="delivery" required>
                         I need this book faster
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="no order">
+                        <input id="no-Order" type="radio" value="no-Order" name="delivery" required>
+                        I am interested in this title, but cannot wait for the Libraries to order
                     </label>
                 </div>
             </fieldset>
