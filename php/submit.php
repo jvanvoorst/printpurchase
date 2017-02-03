@@ -46,7 +46,7 @@ if ($delivery !== "no-Order") {
 // if delivery speed is regular order book and send email to staff
 if ($delivery === "regular") {
     // order with ProQuest API
-    $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn . '&Quantity=1';
+    $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
     $response = \Httpful\Request::get($url)->send();
     $res = json_decode($response);
     // if order is successfull ie code = 100 send success message to staff

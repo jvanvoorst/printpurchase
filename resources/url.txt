@@ -7,3 +7,5 @@ docker.dev/index.html?isbn=9781786353726&author=&title=Mergers and acquisitions,
 https://culibraries.colorado.edu/printpurchase/index.php?isbn=9781928088219&author=Skibsrud, Johanna, 1980-, author.&title=The description of the world / Johanna Skibsrud
 
 https://culibraries.colorado.edu/printpurchase/index.php?isbn=9781501123429&author=Mejia,%20Mindy,%20author.&title=Everything%20you%20want%20me%20to%20be%20:%20a%20novel%20/%20Mindy%20Mejia
+
+https://oasis-services-alpha.proquest.com/order/?dupeover=false&Quantity=1&apiKey=7be2d31f-05c7-4937-afb8-4ff0ed98cd17&ISBN=9781501123429
