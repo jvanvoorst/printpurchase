@@ -153,12 +153,6 @@
                         I need this book faster
                     </label>
                 </div>
-                <div class="radio">
-                    <label for="no order">
-                        <input id="no-Order" type="radio" value="no-Order" name="delivery" required>
-                        I am interested in this title, but cannot wait for the Libraries to order
-                    </label>
-                </div>
             </fieldset>
         </div>
         <!-- submit button -->

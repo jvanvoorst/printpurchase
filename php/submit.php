@@ -36,12 +36,10 @@ catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
 
-// email for patron unless delivery = no-Order
-if ($delivery !== "no-Order") {
-    $bodyPatron = createBody($config["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
-    $config["headerPatron"]["To"] = $email;
-    sendMail($email, $config["headerPatron"], $bodyPatron);
-}
+// email for patron unless
+$bodyPatron = createBody($config["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
+$config["headerPatron"]["To"] = $email;
+sendMail($email, $config["headerPatron"], $bodyPatron);
 
 // if delivery speed is regular order book and send email to staff
 if ($delivery === "regular") {

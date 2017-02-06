@@ -39,11 +39,7 @@ $(function() {
             data: $('form').serialize(),
             success: function(res, status) {
                 console.log(res);
-                if ($('#no-Order').is(':checked')) {
-                    window.location.replace("noorder.html");
-                } else {
-                    window.location.replace("success.html");
-                }
+                window.location.replace("success.html");
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
