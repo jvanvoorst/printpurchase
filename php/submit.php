@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL); 
-ini_set('display_errors', 1);
-
 include('./../resources/lib/httpful/httpful.phar');
 include('./../resources/config.php');
 include('./../resources/db.php');
@@ -78,9 +75,9 @@ function sendMail($recipients, $header, $body) {
 }
 
 function createBody($body, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $dt) {
-    $ref = "Order ref# " . $id . "\n\n";
-    $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\nDelivery Time: " . $dt . "\n\n";
-    $patron = "Patron\nName: " . $firstName . " " . $lastName . "\nAffiliation: " . $affiliation . "\nDepartment: " . $department . "\nEmail: " . $email;
+    $ref = "Order ref# $id \n\n";
+    $book = "Book\nISBN: $isbn \nTitle: $title \nAuthor: $author \nDelivery Time: $dt \n\n";
+    $patron = "Patron\nName: $firstName $lastName \nAffiliation: $affiliation \nDepartment: $department \nEmail: $email";
 
     return $body . $ref . $book . $patron;
 }
