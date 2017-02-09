@@ -48,28 +48,28 @@
         <h1 class="h2">Patron <small>Please verify your info</small></h1>
         <!-- First name Last name -->
         <div class="row">
-            <fieldset class="form-group col-md-6">
+            <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $givenName; ?>" required>
-            </fieldset>
-            <fieldset class="form-group col-md-6">
+                <input title="First Name"type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $givenName; ?>" required>
+            </div>
+            <div class="form-group col-md-6">
                 <label for="lastName">Last Name</label>
                 <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $sn; ?>" required>
-            </fieldset>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
                 <!-- Department Major -->
-                <fieldset class="form-group">
+                <div class="form-group">
                         <label for="department">Department/Major</label>
                         <input type="text" class="form-control" name="department" id="department" value="<?php echo $homeDepartment; ?>" required>
-                </fieldset>
+                </div>
                 <!-- Email Address -->
-                <fieldset class="form-group">
+                <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" class="form-control" name="email" id="email" value="<?php echo $mail; ?>"required>
-                </fieldset>
+                </div>
             </div>
             <!-- Affiliation -->
             <div class="col-md-6">
@@ -101,41 +101,41 @@
         <h2 class="h2">Book</h2>
         <div class="row">
             <!-- Title -->
-            <fieldset class="form-group col-md-6">
+            <div class="form-group col-md-6">
                 <label for="title">Title</label>
                 <textarea rows="2" class="form-control" id="title" name="title" readonly></textarea> 
-            </fieldset>
+            </div>
             <!-- Author -->
-            <fieldset class="form-group col-md-6">
+            <div class="form-group col-md-6">
                 <label for="author">Author/Publisher</label>
                 <textarea class="form-control" id="author" name="author" readonly></textarea>
-            </fieldset>
+            </div>
         </div>
 
         <div class="row">
             <!-- ISBN -->
-            <fieldset class="form-group col-md-6">
+            <div class="form-group col-md-6">
                 <label for="isbn">ISBN</label>
                 <input type="text" class="form-control" id="isbn" name="isbn" readonly>
-            </fieldset>
+            </div>
         </div>
 
         <!-- Delivery ==================================================== -->
         <h3 class="h2">Estimated Delivery Time</h3>
         <!-- Delivery Time (modified from what Coutts sends back) -->
         <div class="row">
-            <fieldset class="form-group col-md-6">
+            <div class="form-group col-md-6">
                 <label for="deliveryTimePatron">(business days)</label>
-                <div id="deliveryTimePatron">
+                <div id="deliveryTimeEst">
                     <img alt="loading" src="img/spin.svg">
                 </div>
-            </fieldset>
+            </div>
         </div>
         <!-- hidden input for the real delivery time returned from Coutts -->
-        <fieldset class="form-group" hidden>
+        <div class="form-group" hidden>
             <label for="deliveryTime">Delivery Time (real)</label>
             <input type="text" class="form-control" id="deliveryTime" name="deliveryTime" readonly>
-        </fieldset>
+        </div>
         <!-- Delivery selection -->
         <div class="row">
             <fieldset class="radio-group col-md-6">

@@ -14,7 +14,8 @@ $(function() {
         data: {'isbn' : urlParams.parameters.isbn},
         success: function(res, status) {
             var patronDate = adjustDate(Number(res));
-            $('#deliveryTimePatron').html("<input class=\"form-control\" type=\"text\" value=\"" + patronDate + "\" name=\"deliveryTimePatron\" readonly>");
+            $('#deliveryTimeEst').html("<input class=\"form-control\" id=\"deliveryTimePatron\" type=\"text\" value=\"\" name=\"deliveryTimePatron\" readonly>");
+            $('#deliveryTimePatron').val(patronDate);
             $('#deliveryTime').val(Number(res));
             $(submitBtn).show();
         },
