@@ -6,7 +6,7 @@ var author = unescape(urlParams.parameters.author);
 
 $(function() {
     // initial hide submit button until delivery date is returned
-    $(submitBtn).hide();
+    $('#submitBtn').hide();
     // retrieve book data from Coutts
     $.ajax({
         url: 'php/getbookinfo.php',
@@ -17,7 +17,7 @@ $(function() {
             $('#deliveryTimeEst').html("<input class=\"form-control\" id=\"deliveryTimePatron\" type=\"text\" value=\"\" name=\"deliveryTimePatron\" readonly>");
             $('#deliveryTimePatron').val(patronDate);
             $('#deliveryTime').val(Number(res));
-            $(submitBtn).show();
+            $('#submitBtn').show();
         },
         error: function(xhr, desc, err) {
             console.log(xhr);
@@ -33,7 +33,7 @@ $(function() {
     // Submit action
     $('form').submit( function(event) {        
         event.preventDefault();
-        $(submitBtn).fadeOut(300);
+        $('#submitBtn').fadeOut(300);
         $.ajax({
             url: 'php/submit.php',
             type: 'POST',

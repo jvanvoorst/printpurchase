@@ -34,7 +34,7 @@
 
     <header>
         <div class="container banner">
-            <p class="banner-text">University Libraries</p>
+            <h1 class="banner-text">University Libraries</h1>
         </div>
     </header>
 
@@ -45,12 +45,12 @@
     <form class="container">
 
         <!-- Patron ====================================================== -->
-        <h1 class="h2">Patron <small>Please verify your info</small></h1>
+        <h2 class="h2">Patron <small>Please verify your info</small></h2>
         <!-- First name Last name -->
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
-                <input title="First Name"type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $givenName; ?>" required>
+                <input title="First Name" type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $givenName; ?>" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="lastName">Last Name</label>
@@ -68,7 +68,7 @@
                 <!-- Email Address -->
                 <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" class="form-control" name="email" id="email" value="<?php echo $mail; ?>"required>
+                        <input type="email" class="form-control" name="email" id="email" value="<?php echo $mail; ?>" required>
                 </div>
             </div>
             <!-- Affiliation -->
@@ -121,7 +121,7 @@
         </div>
 
         <!-- Delivery ==================================================== -->
-        <h3 class="h2">Estimated Delivery Time</h3>
+        <h2 class="h2">Estimated Delivery Time</h2>
         <!-- Delivery Time (modified from what Coutts sends back) -->
         <div class="row">
             <div class="form-group col-md-6">
