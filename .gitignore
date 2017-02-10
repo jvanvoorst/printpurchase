@@ -1,2 +1,4 @@
-resources/config.php
+src/resources/config.php
+build/
+node_modules/
 .DS_Store
