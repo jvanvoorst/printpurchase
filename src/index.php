@@ -15,6 +15,7 @@
 
     <body>
 
+    <!-- Force IE to not use compatibility mode even on intranet -->
     <?php header('X-UA-Compatible: IE=edge'); ?>
 
     <?php
@@ -77,6 +78,12 @@
             <div class="col-md-6">
                 <fieldset class="radio-group">
                     <legend class="radio-legend">Affiliation</legend>
+                    <div class="radio">
+                        <label for="undergrad">
+                            <input id="undergrad" type="radio" value="undergrad" name="affiliation" required>
+                            Undergraduate
+                        </label>
+                    </div>
                     <div class="radio">
                         <label for="grad">
                             <input id="grad" type="radio" value="grad" name="affiliation" required>

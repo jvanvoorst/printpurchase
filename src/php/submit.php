@@ -33,7 +33,7 @@ catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
 
-// email for patron unless
+// email for patron
 $bodyPatron = createBody($config["bodyPatron"], $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTimePatron);
 $config["headerPatron"]["To"] = $email;
 sendMail($email, $config["headerPatron"], $bodyPatron);
@@ -74,12 +74,12 @@ function sendMail($recipients, $header, $body) {
     }
 }
 
-function createBody($body, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $dt) {
+function createBody($msg, $id, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $dt) {
     $ref = "Order ref# $id \n\n";
     $book = "Book\nISBN: $isbn \nTitle: $title \nAuthor: $author \nDelivery Time: $dt \n\n";
     $patron = "Patron\nName: $firstName $lastName \nAffiliation: $affiliation \nDepartment: $department \nEmail: $email";
 
-    return $body . $ref . $book . $patron;
+    return $msg . $ref . $book . $patron;
 }
 
 $db = null;
