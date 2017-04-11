@@ -25,4 +25,3 @@ function throwError(taskName, msg) {
       message: msg
     });
 }
-
